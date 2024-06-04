@@ -5,6 +5,7 @@ namespace Models
     public class Carro
     {
         public readonly static string INSERT = "INSERT INTO TB_CARRO (Placa, Nome, AnoModelo, AnoFabricacao, Cor) VALUES (@Placa, @Nome, @AnoModelo, @AnoFabricacao, @Cor);";
+        public readonly static string INSERTCAST = "INSERT INTO TB_CARRO (Placa, Nome, AnoModelo, AnoFabricacao, Cor) OUTPUT INSERTED.Placa VALUES (@Placa, @Nome, @AnoModelo, @AnoFabricacao, @Cor)";
         [JsonProperty("Placa")]
         public string Placa { get; set; }
         [JsonProperty("Nome")]
