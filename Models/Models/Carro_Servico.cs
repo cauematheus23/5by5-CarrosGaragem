@@ -13,6 +13,6 @@ namespace Models
         public Servico Servico { get; set; }
         public bool Status { get; set; }
 
-        public override string? ToString() => $"Id: {Id},\n Carro: {Carro.Placa},\n Serviço: {Servico.Id},\n Status: {Status}";
+        public override string? ToString() => $"Id: {Id},\nCarro: {Carro.Placa},\nServiço: {Servico.Id},\nStatus: {Status}";
     }
 }

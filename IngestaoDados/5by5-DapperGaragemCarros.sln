@@ -5,7 +5,7 @@ VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "5by5-DapperGaragemCarros", "5by5-DapperGaragemCarros\5by5-DapperGaragemCarros.csproj", "{DD45F25A-302F-4153-86E7-8A0841A50FE1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contollers", "Contollers\Contollers.csproj", "{A039C963-8156-4940-9A5F-46D8CE5971CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controllers", "Contollers\Controllers.csproj", "{A039C963-8156-4940-9A5F-46D8CE5971CC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{0913DFB3-174E-4780-803A-37C893CF7235}"
 EndProject

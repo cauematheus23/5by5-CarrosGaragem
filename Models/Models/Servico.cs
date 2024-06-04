@@ -11,6 +11,6 @@ namespace Models
         public int Id { get; set; }
         public string Descricao { get; set; }
 
-        public override string? ToString() => $"Id: {Id},\n Descrição: {Descricao}";
+        public override string? ToString() => $"Id: {Id},\nDescrição: {Descricao}";
     }
 }
