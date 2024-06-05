@@ -6,5 +6,6 @@ namespace Repositories
     {
         List<Carro> RetornarCarros();
         List<Carro_Servico> ServicosCarros();
+        List<Carro> CarrosComServicos();
     }
 }

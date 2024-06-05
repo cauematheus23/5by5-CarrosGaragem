@@ -3,139 +3,61 @@
 // retornar todos os carros fabricados entre 2010 e 2011
 //Converter as 3 consultas para XML
 
+using Controllers;
 using Models;
 using Repositories;
 using System.Xml.Linq;
 
-
-
-CarroRepository cr = new CarroRepository();
-var x = cr.ServicosCarros();
-foreach (var item in x)
+ void Enter()
 {
-    Console.WriteLine(item);
-    Console.WriteLine();
+    Console.WriteLine("Press Enter to continue");
+    Console.ReadLine();
+    Console.Clear();
 }
-
-var carros = cr.CarrosComServicos();
-Console.WriteLine("Carros com serviços ativos");
-
-Console.WriteLine("Carros Vermelhos");
-List<Carro> carros_vermelhos = new List<Carro>( cr.RetornarCarros().Where(c => c.Cor == "Vermelho"));
-
-var carros_fabricados = new List<Carro>(cr.RetornarCarros().Where(c => c.AnoFabricacao >= 2010 && c.AnoFabricacao <= 2011));
-Console.WriteLine("Carros fabricados entre 2010 e 2011");
-
-
-bool GenerateXMLCarroVermelho(List<Carro> lst)
+void CriarMenu()
 {
-    string path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Documents\\Dados\\";
-    string file = "RedCars";
-    if (!Directory.Exists(path))
+    
+    do
     {
-        Directory.CreateDirectory(path);
-    }
-    if (!File.Exists(path + file))
-    {
-        var x = File.Create(path + file);
-        x.Close();
-    }
-    if (lst.Count > 0)
-    {
-        var infracao = new XElement("Root", from carro in lst
-                                            select new XElement("Carro",
-                                                new XElement("Placa", carro.Placa),
-                                                new XElement("Nome", carro.Nome),
-                                                new XElement("AnoModelo", carro.AnoModelo),
-                                                new XElement("AnoFabricacao", carro.AnoFabricacao),
-                                                new XElement("Cor", carro.Cor)
-                                            )
-        );
+        switch (new Menu().ChamarMenu())
+        {
+            case 0:
+                Console.WriteLine("Finalizando o Programa");
+                Environment.Exit(0);
+                break;
+            case 1:
+                Console.WriteLine("Carros Vermelhos");
+                new CarroController().RetornarCarros().Where(c => c.Cor == "Vermelho").ToList().ForEach(c => Console.WriteLine(c));
+                Enter();
+                break;
+            case 2:
+                Console.WriteLine("Gerando XML Carros Vermelhos");
+                Console.WriteLine(new GenerateXMLs().GenerateXMLCarroVermelho(new CarroController().RetornarCarros().Where(c => c.Cor == "Vermelho").ToList()) ? "Criado com sucesso":"erro ao criar");
+                Enter();
+                break;
+            case 3:
+                Console.WriteLine("Carros com Status True");
+                new CarroController().ServicosCarros().ForEach(c => Console.WriteLine(c));
+                Enter();
+                break;
+            case 4:
+                Console.WriteLine("Gerando XML Carros com Status True");
+                Console.WriteLine( new GenerateXMLs().GenerateXMLStatusTrue(new CarroController().CarrosComServicos()) ? "Criado com sucesso" : "erro ao criar");
+                Enter();
+                break;
+            case 5:
+                Console.WriteLine("Carros fabricados entre 2010 e 2011");
+                new CarroController().RetornarCarros().Where(c => c.AnoFabricacao >= 2010 && c.AnoFabricacao <= 2011).ToList().ForEach(c => Console.WriteLine(c));
+                Enter();
+                break;
+            case 6:
+                Console.WriteLine("Gerando XML Carros fabricados entre 2010 e 2011");
+                Console.WriteLine(new GenerateXMLs().GenerateXMLAnoFabricado(new CarroController().RetornarCarros().Where(c => c.AnoFabricacao >= 2010 && c.AnoFabricacao <= 2011).ToList()) ? "Criado com sucesso" : "erro ao criar");
+                Enter();
+                break;
 
-        StreamWriter sw = new StreamWriter(path + file);
-        sw.Write(infracao);
-        sw.Close();
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-
+        }
+    } while (true);
 }
-bool GenerateXMLStatusTrue(List<Carro> lst)
-{
-    string path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Documents\\Dados\\";
-    string file = "CarStatsTrue";
-    if (!Directory.Exists(path))
-    {
-        Directory.CreateDirectory(path);
-    }
-    if (!File.Exists(path + file))
-    {
-        var x = File.Create(path + file);
-        x.Close();
-    }
-    if (lst.Count > 0)
-    {
-        var infracao = new XElement("Root", from carro in lst
-                                            select new XElement("Carro",
-                                                new XElement("Placa", carro.Placa),
-                                                new XElement("Nome", carro.Nome),
-                                                new XElement("AnoModelo", carro.AnoModelo),
-                                                new XElement("AnoFabricacao", carro.AnoFabricacao),
-                                                new XElement("Cor", carro.Cor)
-                                            )
-        );
+CriarMenu();
 
-        StreamWriter sw = new StreamWriter(path + file);
-        sw.Write(infracao);
-        sw.Close();
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-bool GenerateXMLAnoFabricado(List<Carro> lst)
-{
-    string path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Documents\\Dados\\";
-    string file = "CarsFabricateBetween";
-    if (!Directory.Exists(path))
-    {
-        Directory.CreateDirectory(path);
-    }
-    if (!File.Exists(path + file))
-    {
-        var x = File.Create(path + file);
-        x.Close();
-    }
-    if (lst.Count > 0)
-    {
-        var infracao = new XElement("Root", from carro in lst
-                                            select new XElement("Carro",
-                                                new XElement("Placa", carro.Placa),
-                                                new XElement("Nome", carro.Nome),
-                                                new XElement("AnoModelo", carro.AnoModelo),
-                                                new XElement("AnoFabricacao", carro.AnoFabricacao),
-                                                new XElement("Cor", carro.Cor)
-                                            )
-        );
-
-        StreamWriter sw = new StreamWriter(path + file);
-        sw.Write(infracao);
-        sw.Close();
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-
-}
-
-
-Console.WriteLine(GenerateXMLCarroVermelho(carros_vermelhos));
-Console.WriteLine(GenerateXMLStatusTrue(carros));
-Console.WriteLine(GenerateXMLAnoFabricado(carros_fabricados));

@@ -13,7 +13,6 @@ namespace Repositories
         {
             Conn = ConfigurationManager.ConnectionStrings["StringConnection"].ConnectionString;
         }
-
         public List<Carro> RetornarCarros()
         {
             var carros = new List<Carro>();
@@ -32,7 +31,6 @@ namespace Repositories
             }
             return carros;
         }
-
         public List<Carro_Servico> ServicosCarros()
         {
             var servicos_carros = new List<Carro_Servico>();
@@ -40,11 +38,10 @@ namespace Repositories
             {
                 conn.Open();
                 servicos_carros = conn.Query<Carro_Servico, Carro, Servico, Carro_Servico>(Carro_Servico.SELECT,
-                    (carroServico, carro, servico) => { carroServico.Carro = carro; carroServico.Servico = servico; return carroServico; }, splitOn: "PlacaCarro,IdServico").ToList();
+                    (carroServico, carro, servico) => { carroServico.Carro = carro; carroServico.Servico = servico; return carroServico; }, splitOn: "Placa,Id").ToList();
             }
             return servicos_carros;
         }
-
         public List<Carro> CarrosComServicos()
         {
             var carros = new List<Carro>();
