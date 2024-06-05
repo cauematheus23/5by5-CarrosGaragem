@@ -8,7 +8,7 @@ namespace Models
 {
     public class Carro_Servico
     {
-        public readonly static string SELECT = "SELECT * from TB_CARROSERVICO cs inner join TB_CARRO c ON cs.PlacaCarro = c.Placa inner join TB_SERVICO s ON cs.IdServico = s.Id";
+        public readonly static string SELECT = "SELECT cs.Id,cs.PlacaCarro,cs.IdServico,cs.Status,c.Placa,c.Nome,c.AnoFabricacao,c.AnoFabricacao,c.Cor,s.Descricao from TB_CARROSERVICO cs inner join TB_CARRO c ON cs.PlacaCarro = c.Placa inner join TB_SERVICO s ON cs.IdServico = s.Id;";
         public int Id { get; set; }
         public Carro Carro { get; set; }    
         public Servico Servico { get; set; }
