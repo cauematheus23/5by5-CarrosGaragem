@@ -6,6 +6,9 @@ namespace Models
     {
         public readonly static string INSERT = "INSERT INTO TB_CARRO (Placa, Nome, AnoModelo, AnoFabricacao, Cor) VALUES (@Placa, @Nome, @AnoModelo, @AnoFabricacao, @Cor);";
         public readonly static string INSERTCAST = "INSERT INTO TB_CARRO (Placa, Nome, AnoModelo, AnoFabricacao, Cor) OUTPUT INSERTED.Placa VALUES (@Placa, @Nome, @AnoModelo, @AnoFabricacao, @Cor)";
+        public readonly static string SELECT = "SELECT Placa, Nome, AnoModelo, AnoFabricacao, Cor FROM TB_CARRO";
+        public readonly static string SELECTStatus = "SELECT Placa, Nome, AnoModelo, AnoFabricacao, Cor FROM TB_CARRO c INNER JOIN TB_CARROSERVICO s ON c.Placa = s.PlacaCarro WHERE s.Status = 1";
+
         [JsonProperty("Placa")]
         public string Placa { get; set; }
         [JsonProperty("Nome")]
