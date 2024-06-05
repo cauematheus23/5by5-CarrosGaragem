@@ -55,10 +55,11 @@ namespace Repositories
                     status = true;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine("Parametros nao encontrado na base de dados");
+                Console.WriteLine(e.Message);
 
-                throw;
             }
             return status;
         }

@@ -11,4 +11,4 @@ CarroController controller = new CarroController();
     Status = (new Random().Next(0, 2) == 1)
 });*/
 
-controller.AgregarCarroServico("PUY-3041", 1, true);
+controller.AgregarCarroServico("WPU-0150", 1, true);
